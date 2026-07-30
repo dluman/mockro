@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "feign"
+name = "mockro"
 version = "0.1.0"
 description = "Mock MicroPython libraries for CPython development and testing."
 readme = "README.md"
@@ -31,15 +31,15 @@ dependencies = []
 cli = []
 
 [project.urls]
-Homepage = "https://github.com/dougluman/feign"
-Repository = "https://github.com/dougluman/feign"
-Issues = "https://github.com/dougluman/feign/issues"
+Homepage = "https://github.com/dougluman/mockro"
+Repository = "https://github.com/dougluman/mockro"
+Issues = "https://github.com/dougluman/mockro/issues"
 
 [project.scripts]
-feign = "feign.cli:main"
+mockro = "mockro.cli:main"
 
 [project.entry-points.pytest11]
-feign = "feign.pytest_plugin"
+mockro = "mockro.pytest_plugin"
 
 [dependency-groups]
 dev = [
@@ -49,8 +49,8 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/feign"]
-force-include = { "src/feign/_feign.pth" = "feign.pth" }
+packages = ["src/mockro"]
+force-include = { "src/mockro/_mockro.pth" = "mockro.pth" }
 
 [tool.hatch.build.targets.sdist]
 include = [
@@ -69,7 +69,7 @@ pythonpath = ["src"]
 target-version = "py311"
 line-length = 100
 exclude = [
-    "src/feign/stubs",
+    "src/mockro/stubs",
 ]
 
 [tool.ruff.lint]
@@ -110,7 +110,7 @@ namespace_packages = true
 explicit_package_bases = true
 mypy_path = "src"
 disable_error_code = ["no-any-return"]
-exclude = ["src/feign/stubs"]
+exclude = ["src/mockro/stubs"]
 
 [tool.uv]
 default-groups = ["dev"]

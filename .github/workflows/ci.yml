@@ -29,9 +29,9 @@ jobs:
 
       - name: Run lint
         run: |
-          uv run ruff check src/feign tests
-          uv run ruff format --check src/feign tests
-          uv run mypy src/feign
+          uv run ruff check src/mockro tests
+          uv run ruff format --check src/mockro tests
+          uv run mypy src/mockro
 
       - name: Run tests
         run: uv run pytest

@@ -1,0 +1,26 @@
+"""Compatibility alias for ``mockro.uctypes``."""
+
+from mockro.uctypes import (  # noqa: F401
+    ARRAY,
+    BIG_ENDIAN,
+    FLOAT32,
+    FLOAT64,
+    INT8,
+    INT16,
+    INT32,
+    INT64,
+    LITTLE_ENDIAN,
+    NATIVE,
+    PTR,
+    UINT8,
+    UINT16,
+    UINT32,
+    UINT64,
+    VOID,
+    addressof,
+    bytearray_at,
+    bytes_at,
+    sizeof,
+    struct,
+    union,
+)

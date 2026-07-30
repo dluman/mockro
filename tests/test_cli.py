@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from feign.cli import main
+from mockro.cli import main
 
 
 def test_run_script_with_mocks(tmp_path: Path) -> None:
@@ -48,19 +48,19 @@ def test_init_refuses_existing_directory(tmp_path: Path) -> None:
 
 def test_cli_entry_point_runs() -> None:
     result = subprocess.run(
-        [sys.executable, "-m", "feign", "--help"],
+        [sys.executable, "-m", "mockro", "--help"],
         capture_output=True,
         text=True,
         check=True,
     )
-    assert "feign" in result.stdout
+    assert "mockro" in result.stdout
 
 
-def test_python_m_feign_run(tmp_path: Path) -> None:
+def test_python_m_mockro_run(tmp_path: Path) -> None:
     script = tmp_path / "script.py"
     script.write_text("import machine\nprint(machine.freq())\n", encoding="utf-8")
     result = subprocess.run(
-        [sys.executable, "-m", "feign", "run", str(script)],
+        [sys.executable, "-m", "mockro", "run", str(script)],
         capture_output=True,
         text=True,
         check=True,

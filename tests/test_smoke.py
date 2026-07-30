@@ -1,20 +1,20 @@
-"""Smoke tests for core feign functionality."""
+"""Smoke tests for core mockro functionality."""
 
 from __future__ import annotations
 
 import sys
 
-import feign
+import mockro
 
 
 def test_activate_installs_modules() -> None:
-    feign.activate()
+    mockro.activate()
     assert "machine" in sys.modules
     assert "network" in sys.modules
 
 
 def test_import_machine() -> None:
-    feign.activate()
+    mockro.activate()
     import machine
     import network
 
@@ -23,7 +23,7 @@ def test_import_machine() -> None:
 
 
 def test_default_pin_value() -> None:
-    feign.activate()
+    mockro.activate()
     import machine
 
     pin = machine.Pin(2, machine.Pin.IN)
@@ -31,19 +31,19 @@ def test_default_pin_value() -> None:
 
 
 def test_patch_return_value() -> None:
-    feign.activate()
+    mockro.activate()
     import machine
 
-    feign.patch("machine.Pin.value", return_value=1)
+    mockro.patch("machine.Pin.value", return_value=1)
     pin = machine.Pin(2, machine.Pin.IN)
     assert pin.value() == 1
 
 
 def test_patch_side_effect() -> None:
-    feign.activate()
+    mockro.activate()
     import machine
 
-    feign.patch("machine.Pin.value", side_effect=[1, 0, 1])
+    mockro.patch("machine.Pin.value", side_effect=[1, 0, 1])
     pin = machine.Pin(2, machine.Pin.IN)
     assert pin.value() == 1
     assert pin.value() == 0
@@ -51,10 +51,10 @@ def test_patch_side_effect() -> None:
 
 
 def test_override_context_manager() -> None:
-    feign.activate()
+    mockro.activate()
     import machine
 
-    with feign.override(machine_Pin_value=1):
+    with mockro.override(machine_Pin_value=1):
         pin = machine.Pin(2, machine.Pin.IN)
         assert pin.value() == 1
 
@@ -62,13 +62,13 @@ def test_override_context_manager() -> None:
 
 
 def test_recorder_records_calls() -> None:
-    feign.get_recorder().clear()
-    feign.activate()
+    mockro.get_recorder().clear()
+    mockro.activate()
     import machine
 
     pin = machine.Pin(2, machine.Pin.IN)
     pin.value()
-    calls = feign.get_recorder().calls("machine.Pin.value")
+    calls = mockro.get_recorder().calls("machine.Pin.value")
     assert len(calls) == 1
 
 
@@ -80,8 +80,8 @@ def test_class_override() -> None:
         def value(self) -> int:
             return 42
 
-    feign.activate()
-    feign.patch("machine.Pin", CustomPin)
+    mockro.activate()
+    mockro.patch("machine.Pin", CustomPin)
     import machine
 
     pin = machine.Pin(2)
@@ -89,23 +89,23 @@ def test_class_override() -> None:
 
 
 def test_freq_default() -> None:
-    feign.activate()
+    mockro.activate()
     import machine
 
     assert machine.freq() == 160_000_000
 
 
 def test_network_wlan_isconnected() -> None:
-    feign.activate()
+    mockro.activate()
     import network
 
-    feign.patch("network.WLAN.isconnected", return_value=True)
+    mockro.patch("network.WLAN.isconnected", return_value=True)
     wlan = network.WLAN(network.STA_IF)
     assert wlan.isconnected()
 
 
 def test_socket_create() -> None:
-    feign.activate()
+    mockro.activate()
     import socket
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -113,14 +113,14 @@ def test_socket_create() -> None:
 
 
 def test_time_functions() -> None:
-    feign.activate()
+    mockro.activate()
     import utime
 
     assert utime.ticks_add(10, 5) == 15
 
 
 def test_json_loads() -> None:
-    feign.activate()
+    mockro.activate()
     import ujson
 
     data = ujson.loads('{"a": 1}')
