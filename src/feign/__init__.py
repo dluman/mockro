@@ -20,8 +20,3 @@ __all__ = [
     "mock_function",
     "mock_class",
 ]
-
-# Allow ``FEIGN=1 python main.py`` to work without an explicit activate call.
-from feign._core import _maybe_activate_from_env
-
-_maybe_activate_from_env()

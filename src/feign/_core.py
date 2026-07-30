@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import importlib
-import os
 import sys
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -150,7 +149,6 @@ _SAFE_MODULE_NAMES: tuple[str, ...] = (
     "uzlib",
     "bluetooth",
     "framebuf",
-    "gc",
     "micropython",
     "neopixel",
     "dht",
@@ -180,6 +178,7 @@ _ALIAS_MODULE_NAMES: tuple[str, ...] = (
     "struct",
     "select",
     "zlib",
+    "gc",
 )
 
 
@@ -257,9 +256,3 @@ def override(**targets: Any) -> Iterator[None]:
         yield
     finally:
         registry.restore(snapshot)
-
-
-def _maybe_activate_from_env() -> None:
-    """Activate mocks when the ``FEIGN`` environment variable is set."""
-    if os.environ.get("FEIGN"):
-        activate(aliases=True)

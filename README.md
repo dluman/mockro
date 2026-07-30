@@ -22,16 +22,20 @@ pip install feign
 
 ### Run a script with mocks
 
+Once `feign` is installed in the environment, plain Python invocations work:
+
+```bash
+uv run python main.py
+# or
+python main.py
+```
+
+You can also use the explicit wrappers:
+
 ```bash
 feign run main.py
 # or
 python -m feign main.py
-```
-
-If your script or an earlier import already loads `feign`, you can also use:
-
-```bash
-FEIGN=1 python main.py
 ```
 
 ### Run tests with mocks
@@ -44,12 +48,12 @@ pytest
 
 and `import machine` will work in your tests and the code they import.
 
-> **Note:** under pytest, `feign` only installs MicroPython-specific module names
+> **Note:** by default `feign` only installs MicroPython-specific module names
 > such as `machine`, `network`, and `usocket`. It does **not** shadow CPython
 > stdlib modules like `socket`, `time`, `os`, `json`, or `asyncio`, because those
 > are needed by pytest and other tooling. Use `usocket`, `utime`, `uos`, `ujson`,
-> and `uasyncio` in testable code, or run the code through `feign run` to get the
-> non-`u` aliases as well.
+> and `uasyncio` in testable code, or run the code through `feign run` / `python -m feign`
+> to get the non-`u` aliases as well.
 
 ### Override behavior for assignments
 

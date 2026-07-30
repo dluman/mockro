@@ -50,6 +50,7 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/feign"]
+force-include = { "src/feign/_feign.pth" = "feign.pth" }
 
 [tool.hatch.build.targets.sdist]
 include = [

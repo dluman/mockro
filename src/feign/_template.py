@@ -45,13 +45,19 @@ libraries such as ``machine`` and ``network``.
 ## Run the code with mocks
 
 ```bash
-feign run src/main.py
+uv run python src/main.py
+```
+
+You can also use the explicit wrapper:
+
+```bash
+uv run feign run src/main.py
 ```
 
 ## Run tests
 
 ```bash
-pytest
+uv run pytest
 ```
 
 ## Override mock behavior
