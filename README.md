@@ -2,9 +2,13 @@
 
 Mock MicroPython libraries for CPython development and testing.
 
-`mockro` lets students write code that looks exactly like real MicroPython —
-`import machine`, `import network`, and so on — while running and testing it on a
-normal computer without any hardware attached.
+`mockro` lets developers write firmware code that uses real MicroPython APIs —
+`import machine`, `import network`, and so on — and run it on a normal computer
+without hardware attached. It is useful for local development, unit tests, CI,
+and prototyping before deploying to a device.
+
+Originally derived from educational workflows, `mockro` is packaged as a
+standalone development and testing tool for embedded and IoT projects.
 
 ## Quick start
 
@@ -55,7 +59,7 @@ and `import machine` will work in your tests and the code they import.
 > and `uasyncio` in testable code, or run the code through `mockro run` / `python -m mockro`
 > to get the non-`u` aliases as well.
 
-### Override behavior for assignments
+### Stub and override hardware behavior
 
 In `conftest.py` or test fixtures:
 
@@ -73,13 +77,13 @@ with mockro.override(machine_Pin_value=1):
     ...
 ```
 
-### Create a new assignment
+### Scaffold a new project
 
 ```bash
-mockro init my_assignment
+mockro init my_project
 ```
 
-This scaffolds a project with `pyproject.toml`, `conftest.py`, starter source,
+This creates a project with `pyproject.toml`, `conftest.py`, starter source,
 tests, and `.pyi` stubs so editors know the mocked MicroPython APIs.
 
 ## Mocked modules
