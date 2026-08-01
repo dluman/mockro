@@ -2,6 +2,8 @@
 
 Mock MicroPython libraries for CPython development and testing.
 
+[![Documentation](https://img.shields.io/badge/docs-readthedocs-blue)](https://mockro.readthedocs.io/)
+
 `mockro` lets developers write firmware code that uses real MicroPython APIs —
 `import machine`, `import network`, and so on — and run it on a normal computer
 without hardware attached. It is useful for local development, unit tests, CI,
@@ -99,6 +101,10 @@ common port-specific modules:
 - `uselect` / `select`, `uzlib` / `zlib`
 - `neopixel`, `dht`, `onewire`, `ds18x20`
 - `esp`, `esp32`, `rp2`, `pyb`, `samd`, `zephyr`
+
+## Documentation
+
+Full documentation is available at [mockro.readthedocs.io](https://mockro.readthedocs.io/).
 
 ## License
 
